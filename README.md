@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div align="center">
   <br />
     <a href="https://youtu.be/kt0FrkQgw8w" target="_blank">
@@ -884,3 +885,6 @@ Enjoyed creating this project? Dive deeper into our PRO courses for a richer lea
 <img src="https://i.ibb.co/804sPK6/Image-720.png" alt="Project Banner">
 </a>
 # Renaldi-portfolio
+=======
+Hi 
+>>>>>>> 4eb78d55eb5b76f024e34074b394b8b600c5404c

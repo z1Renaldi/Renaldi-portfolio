@@ -28,7 +28,7 @@ export const clientReviews = [
     position: 'Marketing Director at GreenLeaf',
     img: 'assets/review1.png',
     review:
-      'Working with Adrian was a fantastic experience. He transformed our outdated website into a modern, user-friendly platform. His attention to detail and commitment to quality are unmatched. Highly recommend him for any web dev projects.',
+      'Working with Renaldi was a fantastic experience. He transformed our outdated website into a modern, user-friendly platform. His attention to detail and commitment to quality are unmatched. Highly recommend him for any web dev projects.',
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ export const clientReviews = [
     position: 'Founder of TechGear Shop',
     img: 'assets/review2.png',
     review:
-      'Adrian’s expertise in web development is truly impressive. He delivered a robust and scalable solution for our e-commerce site, and our online sales have significantly increased since the launch. He’s a true professional! Fantastic work.',
+      'Renaldi’s expertise in web development is truly impressive. He delivered a robust and scalable solution for our e-commerce site, and our online sales have significantly increased since the launch. He’s a true professional! Fantastic work.',
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ export const clientReviews = [
     position: 'Project Manager at UrbanTech ',
     img: 'assets/review3.png',
     review:
-      'I can’t say enough good things about Adrian. He was able to take our complex project requirements and turn them into a seamless, functional website. His problem-solving abilities are outstanding.',
+      'I can’t say enough good things about Renaldi. He was able to take our complex project requirements and turn them into a seamless, functional website. His problem-solving abilities are outstanding.',
   },
   {
     id: 4,
@@ -52,7 +52,7 @@ export const clientReviews = [
     position: 'CEO of BrightStar Enterprises',
     img: 'assets/review4.png',
     review:
-      'Adrian was a pleasure to work with. He understood our requirements perfectly and delivered a website that exceeded our expectations. His skills in both frontend backend dev are top-notch.',
+      'Renaldi was a pleasure to work with. He understood our requirements perfectly and delivered a website that exceeded our expectations. His skills in both frontend backend dev are top-notch.',
   },
 ];
 
@@ -248,23 +248,52 @@ export const myProjects = [
 
 // constants/index.js
 export const calculateSizes = (isSmall, isMobile, isTablet) => {
+  const pick = (s, m, t, d) => (isSmall ? s : isMobile ? m : isTablet ? t : d);
+
+  // --- meja & elemen kanan tetap
+  const deskScale = pick(0.05, 0.06, 0.065, 0.065);
+  const deskPosition = pick([0.5, -4.5, 0], [0.5, -5.0, 0], [0.3, -5.3, 0], [0.25, -5.5, 0]);
+
+  const TSPosition = pick([5, 4, 0], [7, 4, 0], [7, 4, 0], [9, 3, 0]);
+  const cubePosition = pick([5, -1, 0], [8, -1, 0], [8, -1, 0], [9, -1, 0]);
+  const reactLogoPosition = pick([3, 4, 0], [5, 4, 0], [5, 4, 0], [8, 3, 0]);
+  const ringPosition = pick([-5, 7, 0], [-9, 9, 0], [-10, 9, 0], [-12, 9, 0]);
+
+  // --- posisi VUE
+  const vuePos = pick(
+    [-5.0, -1.5, -5.0], // small
+    [-8.5, 0.0, -5.0], // mobile
+    [-9.5, 1.5, -5.0], // tablet
+    [-11.0, -0.5, -5.0], // desktop
+  );
+
+  // --- target DI BAWAH logo VUE (relatif)
+  // offset per breakpoint: [dx, dy, dz]
+  const [vx, vy, vz] = vuePos;
+  const [dx, dy, dz] = pick(
+    [0.6, 2.0, 1.0], // small → kanan 0.6, turun 2.0, maju 1.0
+    [0.7, 2.2, 1.2], // mobile
+    [0.8, 2.3, 1.2], // tablet
+    [0.9, 2.5, 1.5], // desktop
+  );
+  const targetPosition = [vx + dx, vy - dy, vz + dz];
+
   return {
-    deskScale: isSmall ? 0.05 : isMobile ? 0.06 : 0.065,
-    deskPosition: isMobile ? [0.5, -4.5, 0] : [0.25, -5.5, 0],
-    TSPosition: isSmall ? [5, 4, 0] : isMobile ? [7, 4, 0] : isTablet ? [7, 4, 0] : [15, 3, 0],
-    cubePosition: isSmall ? [5, -1, 0] : isMobile ? [8, -1, 0] : isTablet ? [8, -1, 0] : [15, -1, 0],
-    reactLogoPosition: isSmall ? [3, 4, 0] : isMobile ? [5, 4, 0] : isTablet ? [5, 4, 0] : [12, 3, 0],
-    ringPosition: isSmall ? [-5, 7, 0] : isMobile ? [-10, 10, 0] : isTablet ? [-12, 10, 0] : [-24, 10, 0],
-    targetPosition: isSmall ? [-5, -10, -10] : isMobile ? [-9, -10, -10] : isTablet ? [-11, -7, -10] : [-13, -13, -10],
+    deskScale,
+    deskPosition,
+
+    TSPosition,
+    cubePosition,
+    reactLogoPosition,
+
+    ringPosition,
+
+    // ⬇️ SEKARANG SELALU di bawah Vue
+    targetPosition,
+
     vueLogo: {
-      position: isSmall
-        ? [-5, (7 + -10) / 2, (0 + -10) / 2] // [-5, -1.5, -5]
-        : isMobile
-          ? [(-10 + -9) / 2, (10 + -10) / 2, (0 + -10) / 2] // [-9.5, 0, -5]
-          : isTablet
-            ? [(-12 + -11) / 2, (10 + -7) / 2, (0 + -10) / 2] // [-11.5, 1.5, -5]
-            : [(-24 + -13) / 2, (10 + -13) / 2, (0 + -10) / 2], // [-18.5, -1.5, -5]
-      scale: isSmall ? 0.1 : isMobile ? 0.1 : isTablet ? 0.1 : 0.1,
+      position: vuePos,
+      scale: 0.1,
     },
   };
 };

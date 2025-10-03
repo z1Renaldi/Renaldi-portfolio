@@ -4,7 +4,6 @@ import { Canvas } from '@react-three/fiber';
 import { useMediaQuery } from 'react-responsive';
 import { PerspectiveCamera } from '@react-three/drei';
 
-import TypeScriptLogo from '../components/TypeScriptLogo.jsx';
 import Cube from '../components/Cube.jsx';
 import Rings from '../components/Rings.jsx';
 import ReactLogo from '../components/ReactLogo.jsx';
@@ -50,7 +49,6 @@ const Hero = () => {
               <ReactLogo position={sizes.reactLogoPosition} />
               <Rings position={sizes.ringPosition} />
               <Cube position={sizes.cubePosition} />
-              <TypeScriptLogo position={sizes.TSPosition} scale={0.0} />
             </group>
 
             <ambientLight intensity={5} />

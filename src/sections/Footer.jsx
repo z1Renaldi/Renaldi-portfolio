@@ -38,8 +38,7 @@ const Footer = () => {
           <img src="/assets/instagram.svg" alt="Instagram" className="w-1/2 h-1/2" />
         </a>
       </div>
-
-      <p className="text-white-500">© 2024 Renaldi Timothy. All rights reserved.</p>
+      <p className="text-white-500">© 2025 Renaldi Timothy. All rights reserved.</p>
     </footer>
   );
 };
